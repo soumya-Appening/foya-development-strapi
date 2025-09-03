@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_shared_navigation_links",
+  "info": {
+    "displayName": "Navigation Link",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_contact_infos",
+  "info": {
+    "displayName": "Contact Info",
+    "icon": "phone"
+  },
+  "options": {},
+  "attributes": {
+    "contactDetails": {
+      "type": "component",
+      "component": "shared.contact-detail",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

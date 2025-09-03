@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_ctas",
+  "info": {
+    "displayName": "CTA",
+    "icon": "apps"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "buttonText": {
+      "type": "string"
+    },
+    "buttonLink": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,3 @@
+Admin Panel Credential
+User: soumyajeet.c@appening.xyz
+Password: Secret1234

@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_filters",
+  "info": {
+    "displayName": "Filters"
+  },
+  "options": {},
+  "attributes": {
+    "filters": {
+      "type": "component",
+      "component": "shared.project-filter",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

@@ -1,0 +1,20 @@
+{
+  "collectionName": "components_shared_contact_details",
+  "info": {
+    "displayName": "Contact Detail",
+    "icon": "envelop"
+  },
+  "options": {},
+  "attributes": {
+    "label": {
+      "type": "string"
+    },
+    "value": {
+      "type": "string"
+    },
+    "valueRich": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}

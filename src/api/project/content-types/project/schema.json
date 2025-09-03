@@ -1,0 +1,75 @@
+{
+  "kind": "collectionType",
+  "collectionName": "projects",
+  "info": {
+    "singularName": "project",
+    "pluralName": "projects",
+    "displayName": "Project"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "sortOrder": {
+      "type": "integer"
+    },
+    "link": {
+      "type": "string"
+    },
+    "isPastProject": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "isNewConstruction": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "isRehabilitation": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "isAffordable": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "isMarkerRate": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "isCommercial": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "isMixedUse": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    },
+    "isMultiFamiltyResidential": {
+      "type": "boolean",
+      "required": true,
+      "default": false
+    }
+  }
+}

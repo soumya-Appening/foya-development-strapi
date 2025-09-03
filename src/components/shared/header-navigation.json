@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_header_navigations",
+  "info": {
+    "displayName": "Header Navigation",
+    "icon": "code"
+  },
+  "options": {},
+  "attributes": {
+    "navigations": {
+      "type": "component",
+      "component": "shared.navigation-link",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

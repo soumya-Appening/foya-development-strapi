@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_shared_press_items",
+  "info": {
+    "displayName": "Press Item",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "shortDescription": {
+      "type": "text"
+    },
+    "date": {
+      "type": "datetime"
+    },
+    "link": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

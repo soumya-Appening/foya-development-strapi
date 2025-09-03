@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_shared_video_blocks",
+  "info": {
+    "displayName": "Video Block",
+    "icon": "television"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "videoUrl": {
+      "type": "string"
+    }
+  },
+  "config": {}
+}

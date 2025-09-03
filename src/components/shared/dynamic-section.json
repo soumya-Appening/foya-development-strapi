@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_shared_dynamic_sections",
+  "info": {
+    "displayName": "Dynamic Section",
+    "icon": "book"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "btnText": {
+      "type": "string"
+    },
+    "btnLink": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  },
+  "config": {}
+}

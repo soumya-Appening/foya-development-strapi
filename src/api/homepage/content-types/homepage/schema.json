@@ -1,0 +1,27 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepages",
+  "info": {
+    "singularName": "homepage",
+    "pluralName": "homepages",
+    "displayName": "Homepage"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "blocks": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.hero",
+        "shared.cta",
+        "shared.press-item",
+        "shared.video-block",
+        "shared.gallery",
+        "shared.team-member",
+        "shared.dynamic-section"
+      ]
+    }
+  }
+}
