@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_shared_presses",
+  "info": {
+    "displayName": "Press"
+  },
+  "options": {},
+  "attributes": {
+    "pressItem": {
+      "type": "component",
+      "component": "shared.press-item",
+      "repeatable": true
+    }
+  },
+  "config": {}
+}

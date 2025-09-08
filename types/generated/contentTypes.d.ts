@@ -526,11 +526,11 @@ export interface ApiHomepageHomepage extends Struct.SingleTypeSchema {
       [
         'shared.hero',
         'shared.cta',
-        'shared.press-item',
         'shared.video-block',
         'shared.gallery',
         'shared.team-member',
         'shared.dynamic-section',
+        'shared.press',
       ]
     >;
     createdAt: Schema.Attribute.DateTime;

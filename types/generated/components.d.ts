@@ -165,6 +165,16 @@ export interface SharedNavigationLink extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedPress extends Struct.ComponentSchema {
+  collectionName: 'components_shared_presses';
+  info: {
+    displayName: 'Press';
+  };
+  attributes: {
+    pressItem: Schema.Attribute.Component<'shared.press-item', true>;
+  };
+}
+
 export interface SharedPressItem extends Struct.ComponentSchema {
   collectionName: 'components_shared_press_items';
   info: {
@@ -333,6 +343,7 @@ declare module '@strapi/strapi' {
       'shared.hero': SharedHero;
       'shared.media': SharedMedia;
       'shared.navigation-link': SharedNavigationLink;
+      'shared.press': SharedPress;
       'shared.press-item': SharedPressItem;
       'shared.project-filter': SharedProjectFilter;
       'shared.projects': SharedProjects;

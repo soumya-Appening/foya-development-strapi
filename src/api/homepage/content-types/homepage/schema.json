@@ -16,11 +16,11 @@
       "components": [
         "shared.hero",
         "shared.cta",
-        "shared.press-item",
         "shared.video-block",
         "shared.gallery",
         "shared.team-member",
-        "shared.dynamic-section"
+        "shared.dynamic-section",
+        "shared.press"
       ]
     }
   }

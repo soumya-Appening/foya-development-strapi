@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-09-03T13:18:52.312Z"
+    "x-generation-date": "2025-09-08T05:08:21.936Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -4949,12 +4949,6 @@
           "id": {
             "type": "number"
           },
-          "__component": {
-            "type": "string",
-            "enum": [
-              "shared.press-item"
-            ]
-          },
           "title": {
             "type": "string"
           },
@@ -6558,9 +6552,6 @@
                       "$ref": "#/components/schemas/SharedCtaComponent"
                     },
                     {
-                      "$ref": "#/components/schemas/SharedPressItemComponent"
-                    },
-                    {
                       "$ref": "#/components/schemas/SharedVideoBlockComponent"
                     },
                     {
@@ -6571,6 +6562,9 @@
                     },
                     {
                       "$ref": "#/components/schemas/SharedDynamicSectionComponent"
+                    },
+                    {
+                      "$ref": "#/components/schemas/SharedPressComponent"
                     }
                   ]
                 },
@@ -6579,11 +6573,11 @@
                   "mapping": {
                     "shared.hero": "#/components/schemas/SharedHeroComponent",
                     "shared.cta": "#/components/schemas/SharedCtaComponent",
-                    "shared.press-item": "#/components/schemas/SharedPressItemComponent",
                     "shared.video-block": "#/components/schemas/SharedVideoBlockComponent",
                     "shared.gallery": "#/components/schemas/SharedGalleryComponent",
                     "shared.team-member": "#/components/schemas/SharedTeamMemberComponent",
-                    "shared.dynamic-section": "#/components/schemas/SharedDynamicSectionComponent"
+                    "shared.dynamic-section": "#/components/schemas/SharedDynamicSectionComponent",
+                    "shared.press": "#/components/schemas/SharedPressComponent"
                   }
                 }
               },
@@ -6663,9 +6657,6 @@
                   "$ref": "#/components/schemas/SharedCtaComponent"
                 },
                 {
-                  "$ref": "#/components/schemas/SharedPressItemComponent"
-                },
-                {
                   "$ref": "#/components/schemas/SharedVideoBlockComponent"
                 },
                 {
@@ -6676,6 +6667,9 @@
                 },
                 {
                   "$ref": "#/components/schemas/SharedDynamicSectionComponent"
+                },
+                {
+                  "$ref": "#/components/schemas/SharedPressComponent"
                 }
               ]
             },
@@ -6684,11 +6678,11 @@
               "mapping": {
                 "shared.hero": "#/components/schemas/SharedHeroComponent",
                 "shared.cta": "#/components/schemas/SharedCtaComponent",
-                "shared.press-item": "#/components/schemas/SharedPressItemComponent",
                 "shared.video-block": "#/components/schemas/SharedVideoBlockComponent",
                 "shared.gallery": "#/components/schemas/SharedGalleryComponent",
                 "shared.team-member": "#/components/schemas/SharedTeamMemberComponent",
-                "shared.dynamic-section": "#/components/schemas/SharedDynamicSectionComponent"
+                "shared.dynamic-section": "#/components/schemas/SharedDynamicSectionComponent",
+                "shared.press": "#/components/schemas/SharedPressComponent"
               }
             }
           },
@@ -6751,9 +6745,6 @@
                         "$ref": "#/components/schemas/SharedCtaComponent"
                       },
                       {
-                        "$ref": "#/components/schemas/SharedPressItemComponent"
-                      },
-                      {
                         "$ref": "#/components/schemas/SharedVideoBlockComponent"
                       },
                       {
@@ -6764,6 +6755,9 @@
                       },
                       {
                         "$ref": "#/components/schemas/SharedDynamicSectionComponent"
+                      },
+                      {
+                        "$ref": "#/components/schemas/SharedPressComponent"
                       }
                     ]
                   },
@@ -6772,11 +6766,11 @@
                     "mapping": {
                       "shared.hero": "#/components/schemas/SharedHeroComponent",
                       "shared.cta": "#/components/schemas/SharedCtaComponent",
-                      "shared.press-item": "#/components/schemas/SharedPressItemComponent",
                       "shared.video-block": "#/components/schemas/SharedVideoBlockComponent",
                       "shared.gallery": "#/components/schemas/SharedGalleryComponent",
                       "shared.team-member": "#/components/schemas/SharedTeamMemberComponent",
-                      "shared.dynamic-section": "#/components/schemas/SharedDynamicSectionComponent"
+                      "shared.dynamic-section": "#/components/schemas/SharedDynamicSectionComponent",
+                      "shared.press": "#/components/schemas/SharedPressComponent"
                     }
                   }
                 },
@@ -7314,6 +7308,26 @@
                   }
                 }
               }
+            }
+          }
+        }
+      },
+      "SharedPressComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "__component": {
+            "type": "string",
+            "enum": [
+              "shared.press"
+            ]
+          },
+          "pressItem": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharedPressItemComponent"
             }
           }
         }
