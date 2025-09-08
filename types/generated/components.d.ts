@@ -201,33 +201,6 @@ export interface SharedProjectFilter extends Struct.ComponentSchema {
   };
 }
 
-export interface SharedProjects extends Struct.ComponentSchema {
-  collectionName: 'components_shared_projects';
-  info: {
-    displayName: 'Projects';
-    icon: 'book';
-  };
-  attributes: {
-    category: Schema.Attribute.String;
-    heroImage: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    location: Schema.Attribute.String;
-    shortDescription: Schema.Attribute.Text;
-    slug: Schema.Attribute.String;
-    thumbnail: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
-    title: Schema.Attribute.String;
-  };
-}
-
-export interface SharedProjectsGrid extends Struct.ComponentSchema {
-  collectionName: 'components_shared_projects_grids';
-  info: {
-    displayName: 'Projects Grid';
-  };
-  attributes: {
-    projects: Schema.Attribute.Component<'shared.projects', true>;
-  };
-}
-
 export interface SharedQuote extends Struct.ComponentSchema {
   collectionName: 'components_shared_quotes';
   info: {
@@ -346,8 +319,6 @@ declare module '@strapi/strapi' {
       'shared.press': SharedPress;
       'shared.press-item': SharedPressItem;
       'shared.project-filter': SharedProjectFilter;
-      'shared.projects': SharedProjects;
-      'shared.projects-grid': SharedProjectsGrid;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;
       'shared.seo': SharedSeo;
