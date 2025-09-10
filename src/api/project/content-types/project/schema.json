@@ -31,45 +31,27 @@
     "link": {
       "type": "string"
     },
-    "isPastProject": {
-      "type": "boolean",
-      "required": true,
-      "default": false
+    "slug": {
+      "type": "text"
     },
-    "isNewConstruction": {
-      "type": "boolean",
-      "required": true,
-      "default": false
+    "gallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
-    "isRehabilitation": {
-      "type": "boolean",
-      "required": true,
-      "default": false
+    "isFeatured": {
+      "type": "boolean"
     },
-    "isAffordable": {
-      "type": "boolean",
-      "required": true,
-      "default": false
-    },
-    "isMarkerRate": {
-      "type": "boolean",
-      "required": true,
-      "default": false
-    },
-    "isCommercial": {
-      "type": "boolean",
-      "required": true,
-      "default": false
-    },
-    "isMixedUse": {
-      "type": "boolean",
-      "required": true,
-      "default": false
-    },
-    "isMultiFamiltyResidential": {
-      "type": "boolean",
-      "required": true,
-      "default": false
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::project-category.project-category",
+      "inversedBy": "projects"
     }
   }
 }
