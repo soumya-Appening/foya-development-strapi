@@ -663,7 +663,7 @@ export interface ApiProjectCategoryProjectCategory
     > &
       Schema.Attribute.Private;
     name: Schema.Attribute.String;
-    projects: Schema.Attribute.Relation<'oneToMany', 'api::project.project'>;
+    project: Schema.Attribute.Relation<'manyToOne', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
     slug: Schema.Attribute.Text;
     type: Schema.Attribute.Enumeration<['category', 'status']>;
@@ -684,8 +684,8 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
-    category: Schema.Attribute.Relation<
-      'manyToOne',
+    categories: Schema.Attribute.Relation<
+      'oneToMany',
       'api::project-category.project-category'
     >;
     createdAt: Schema.Attribute.DateTime;

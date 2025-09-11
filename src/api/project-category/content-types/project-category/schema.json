@@ -19,13 +19,16 @@
     },
     "type": {
       "type": "enumeration",
-      "enum": ["category", "status"]
+      "enum": [
+        "category",
+        "status"
+      ]
     },
-    "projects": {
+    "project": {
       "type": "relation",
-      "relation": "oneToMany",
+      "relation": "manyToOne",
       "target": "api::project.project",
-      "mappedBy": "category"
+      "inversedBy": "categories"
     }
   }
 }

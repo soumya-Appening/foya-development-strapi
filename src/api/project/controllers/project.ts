@@ -71,14 +71,14 @@ export default factories.createCoreController(
           "api::project.project",
           baseId as any,
           {
-            populate: { category: true }
+            populate: { categories: true }
           }
         );
-        const relatedCategoryId = (relatedEntity as any)?.category?.id;
+        const relatedCategoryId = (relatedEntity as any)?.categories?.[0]?.id;
         if (relatedCategoryId) {
           mergedFilters.$and = [
             ...(mergedFilters.$and || []),
-            { category: { id: { $eq: relatedCategoryId } } },
+            { categories: { id: { $eq: relatedCategoryId } } },
             { id: { $ne: baseId } }
           ];
         } else {
@@ -151,7 +151,7 @@ export default factories.createCoreController(
         }
 
         if (resolvedCategoryId !== undefined) {
-          mergedFilters.category = { id: { $eq: resolvedCategoryId } };
+          mergedFilters.categories = { id: { $eq: resolvedCategoryId } };
         } else {
           // Force empty result if category not resolvable
           mergedFilters.id = { $in: [] };
@@ -173,7 +173,7 @@ export default factories.createCoreController(
         normalizedQuery.populate = {
           image: true,
           gallery: true,
-          category: true
+          categories: true
         } as any;
       }
 
