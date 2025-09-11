@@ -610,6 +610,37 @@ export interface ApiPortfolioPortfolio extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiPressItemPressItem extends Struct.CollectionTypeSchema {
+  collectionName: 'press_items';
+  info: {
+    displayName: 'Press Item';
+    pluralName: 'press-items';
+    singularName: 'press-item';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    date: Schema.Attribute.Date;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::press-item.press-item'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    shortDescription: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProjectCategoryProjectCategory
   extends Struct.CollectionTypeSchema {
   collectionName: 'project_categories';
@@ -1232,6 +1263,7 @@ declare module '@strapi/strapi' {
       'api::global.global': ApiGlobalGlobal;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::portfolio.portfolio': ApiPortfolioPortfolio;
+      'api::press-item.press-item': ApiPressItemPressItem;
       'api::project-category.project-category': ApiProjectCategoryProjectCategory;
       'api::project.project': ApiProjectProject;
       'api::team-member.team-member': ApiTeamMemberTeamMember;

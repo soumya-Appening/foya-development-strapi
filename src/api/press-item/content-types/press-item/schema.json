@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "press_items",
+  "info": {
+    "singularName": "press-item",
+    "pluralName": "press-items",
+    "displayName": "Press Item"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "shortDescription": {
+      "type": "text"
+    },
+    "date": {
+      "type": "date"
+    },
+    "link": {
+      "type": "string"
+    }
+  }
+}
