@@ -24,11 +24,11 @@
         "status"
       ]
     },
-    "project": {
+    "projects": {
       "type": "relation",
-      "relation": "manyToOne",
+      "relation": "manyToMany",
       "target": "api::project.project",
-      "inversedBy": "categories"
+      "mappedBy": "project_categories"
     }
   }
 }
