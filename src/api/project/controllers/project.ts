@@ -383,7 +383,7 @@ export default factories.createCoreController(
                       name,
                       slug: name.toLowerCase().replace(/\s+/g, "-"),
                       type: "category"
-                    }
+                    } as any
                   }
                 );
                 categoryId = created.id as any;

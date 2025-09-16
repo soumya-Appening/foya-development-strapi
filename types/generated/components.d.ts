@@ -144,6 +144,22 @@ export interface SharedHero extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedHeroBanners extends Struct.ComponentSchema {
+  collectionName: 'components_shared_hero_banners';
+  info: {
+    displayName: 'hero-banners';
+    icon: 'dashboard';
+  };
+  attributes: {
+    bannerImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    >;
+    link: Schema.Attribute.String;
+    subTitle: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
 export interface SharedMedia extends Struct.ComponentSchema {
   collectionName: 'components_shared_media';
   info: {
@@ -185,6 +201,17 @@ export interface SharedPressItem extends Struct.ComponentSchema {
     date: Schema.Attribute.DateTime;
     link: Schema.Attribute.String;
     shortDescription: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+  };
+}
+
+export interface SharedProjectDetailsSections extends Struct.ComponentSchema {
+  collectionName: 'components_shared_project_details_sections';
+  info: {
+    displayName: 'Project Details Sections';
+  };
+  attributes: {
+    description: Schema.Attribute.Blocks;
     title: Schema.Attribute.String;
   };
 }
@@ -314,10 +341,12 @@ declare module '@strapi/strapi' {
       'shared.header': SharedHeader;
       'shared.header-navigation': SharedHeaderNavigation;
       'shared.hero': SharedHero;
+      'shared.hero-banners': SharedHeroBanners;
       'shared.media': SharedMedia;
       'shared.navigation-link': SharedNavigationLink;
       'shared.press': SharedPress;
       'shared.press-item': SharedPressItem;
+      'shared.project-details-sections': SharedProjectDetailsSections;
       'shared.project-filter': SharedProjectFilter;
       'shared.quote': SharedQuote;
       'shared.rich-text': SharedRichText;

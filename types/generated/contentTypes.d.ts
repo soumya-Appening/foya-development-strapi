@@ -472,11 +472,11 @@ export interface ApiContactDetailContactDetail
     > &
       Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
+    sortOrder: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     value: Schema.Attribute.Text;
-    valueRich: Schema.Attribute.Text;
   };
 }
 
@@ -536,6 +536,38 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
     publishedAt: Schema.Attribute.DateTime;
     siteDescription: Schema.Attribute.Text & Schema.Attribute.Required;
     siteName: Schema.Attribute.String & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiHomeHeroHomeHero extends Struct.CollectionTypeSchema {
+  collectionName: 'home_heroes';
+  info: {
+    displayName: 'Home Hero';
+    pluralName: 'home-heroes';
+    singularName: 'home-hero';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    banners: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::home-hero.home-hero'
+    > &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    title: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -603,6 +635,35 @@ export interface ApiJobOpeningJobOpening extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     location: Schema.Attribute.String;
     position: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiPortfolioHeroPortfolioHero
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'portfolio_heroes';
+  info: {
+    displayName: 'Portfolio Hero';
+    pluralName: 'portfolio-heroes';
+    singularName: 'portfolio-hero';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    heroBanners: Schema.Attribute.Component<'shared.hero-banners', true>;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::portfolio-hero.portfolio-hero'
+    > &
+      Schema.Attribute.Private;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
@@ -724,8 +785,7 @@ export interface ApiProjectCategoryProjectCategory
     name: Schema.Attribute.String;
     projects: Schema.Attribute.Relation<'manyToMany', 'api::project.project'>;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.Text;
-    type: Schema.Attribute.Enumeration<['category', 'status']>;
+    slug: Schema.Attribute.UID<'name'>;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -743,6 +803,11 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    carouselGallery: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios',
+      true
+    >;
+    coverImage: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -751,7 +816,6 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    image: Schema.Attribute.Media<'images'> & Schema.Attribute.Required;
     isFeatured: Schema.Attribute.Boolean;
     link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
@@ -760,17 +824,25 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       'api::project.project'
     > &
       Schema.Attribute.Private;
+    location: Schema.Attribute.String;
+    longTitle: Schema.Attribute.Text;
     project_categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::project-category.project-category'
     >;
     publishedAt: Schema.Attribute.DateTime;
-    slug: Schema.Attribute.Text;
+    sections: Schema.Attribute.DynamicZone<['shared.project-details-sections']>;
+    slug: Schema.Attribute.UID<'title'>;
     sortOrder: Schema.Attribute.Integer;
+    sqareFootage: Schema.Attribute.String;
+    subTitle: Schema.Attribute.Text;
     title: Schema.Attribute.String;
+    type: Schema.Attribute.Text;
+    units: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    yearCompletionDate: Schema.Attribute.Date;
   };
 }
 
@@ -799,7 +871,7 @@ export interface ApiTeamMemberTeamMember extends Struct.CollectionTypeSchema {
     photo: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
     publishedAt: Schema.Attribute.DateTime;
     role: Schema.Attribute.String;
-    social: Schema.Attribute.Component<'shared.social-link', true>;
+    sortOrder: Schema.Attribute.Integer;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
@@ -1320,8 +1392,10 @@ declare module '@strapi/strapi' {
       'api::contact-detail.contact-detail': ApiContactDetailContactDetail;
       'api::contact.contact': ApiContactContact;
       'api::global.global': ApiGlobalGlobal;
+      'api::home-hero.home-hero': ApiHomeHeroHomeHero;
       'api::homepage.homepage': ApiHomepageHomepage;
       'api::job-opening.job-opening': ApiJobOpeningJobOpening;
+      'api::portfolio-hero.portfolio-hero': ApiPortfolioHeroPortfolioHero;
       'api::portfolio.portfolio': ApiPortfolioPortfolio;
       'api::press-item.press-item': ApiPressItemPressItem;
       'api::privacy-policy.privacy-policy': ApiPrivacyPolicyPrivacyPolicy;

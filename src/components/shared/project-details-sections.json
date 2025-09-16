@@ -1,0 +1,16 @@
+{
+  "collectionName": "components_shared_project_details_sections",
+  "info": {
+    "displayName": "Project Details Sections"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}

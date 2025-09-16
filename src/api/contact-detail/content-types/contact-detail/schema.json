@@ -17,8 +17,8 @@
     "value": {
       "type": "text"
     },
-    "valueRich": {
-      "type": "text"
+    "sortOrder": {
+      "type": "integer"
     }
   }
 }

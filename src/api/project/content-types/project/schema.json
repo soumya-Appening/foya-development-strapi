@@ -14,10 +14,20 @@
     "title": {
       "type": "string"
     },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "longTitle": {
+      "type": "text"
+    },
+    "subTitle": {
+      "type": "text"
+    },
     "description": {
       "type": "text"
     },
-    "image": {
+    "coverImage": {
       "type": "media",
       "multiple": false,
       "required": true,
@@ -30,9 +40,6 @@
     },
     "link": {
       "type": "string"
-    },
-    "slug": {
-      "type": "text"
     },
     "gallery": {
       "type": "media",
@@ -52,6 +59,37 @@
       "relation": "manyToMany",
       "target": "api::project-category.project-category",
       "inversedBy": "projects"
+    },
+    "location": {
+      "type": "string"
+    },
+    "sqareFootage": {
+      "type": "string"
+    },
+    "type": {
+      "type": "text"
+    },
+    "units": {
+      "type": "string"
+    },
+    "yearCompletionDate": {
+      "type": "date"
+    },
+    "carouselGallery": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "sections": {
+      "type": "dynamiczone",
+      "components": [
+        "shared.project-details-sections"
+      ]
     }
   }
 }

@@ -15,14 +15,8 @@
       "type": "string"
     },
     "slug": {
-      "type": "text"
-    },
-    "type": {
-      "type": "enumeration",
-      "enum": [
-        "category",
-        "status"
-      ]
+      "type": "uid",
+      "targetField": "name"
     },
     "projects": {
       "type": "relation",

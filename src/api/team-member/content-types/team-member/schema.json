@@ -17,6 +17,9 @@
     "role": {
       "type": "string"
     },
+    "sortOrder": {
+      "type": "integer"
+    },
     "bio": {
       "type": "blocks"
     },
@@ -29,11 +32,6 @@
         "videos",
         "audios"
       ]
-    },
-    "social": {
-      "type": "component",
-      "component": "shared.social-link",
-      "repeatable": true
     }
   }
 }

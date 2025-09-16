@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "portfolio_heroes",
+  "info": {
+    "singularName": "portfolio-hero",
+    "pluralName": "portfolio-heroes",
+    "displayName": "Portfolio Hero"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "heroBanners": {
+      "type": "component",
+      "component": "shared.hero-banners",
+      "repeatable": true
+    }
+  }
+}
