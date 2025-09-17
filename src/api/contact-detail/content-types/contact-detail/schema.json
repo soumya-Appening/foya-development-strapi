@@ -14,11 +14,11 @@
     "label": {
       "type": "string"
     },
-    "value": {
-      "type": "text"
-    },
     "sortOrder": {
       "type": "integer"
+    },
+    "value": {
+      "type": "blocks"
     }
   }
 }
