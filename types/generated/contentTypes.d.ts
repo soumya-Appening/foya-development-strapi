@@ -803,6 +803,10 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    cardImage: Schema.Attribute.Media<
+      'images' | 'files' | 'videos' | 'audios'
+    > &
+      Schema.Attribute.Required;
     carouselGallery: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -811,7 +815,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.Text & Schema.Attribute.Required;
     gallery: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
@@ -825,18 +829,18 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     location: Schema.Attribute.String;
-    longTitle: Schema.Attribute.Text;
+    longTitle: Schema.Attribute.Text & Schema.Attribute.Required;
     project_categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::project-category.project-category'
     >;
     publishedAt: Schema.Attribute.DateTime;
     sections: Schema.Attribute.DynamicZone<['shared.project-details-sections']>;
-    slug: Schema.Attribute.UID<'title'>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     sortOrder: Schema.Attribute.Integer;
     sqareFootage: Schema.Attribute.String;
-    subTitle: Schema.Attribute.Text;
-    title: Schema.Attribute.String;
+    subTitle: Schema.Attribute.Text & Schema.Attribute.Required;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     type: Schema.Attribute.Text;
     units: Schema.Attribute.String;
     updatedAt: Schema.Attribute.DateTime;

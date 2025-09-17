@@ -12,20 +12,36 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "longTitle": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "subTitle": {
-      "type": "text"
+      "type": "text",
+      "required": true
     },
     "description": {
-      "type": "text"
+      "type": "text",
+      "required": true
+    },
+    "cardImage": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "coverImage": {
       "type": "media",

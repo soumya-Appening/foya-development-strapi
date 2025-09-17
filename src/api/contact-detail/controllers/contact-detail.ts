@@ -13,7 +13,7 @@ export default factories.createCoreController(
       if (!q.sort) {
         q.sort = "sortOrder:asc";
       }
-      return await (this as any).super.find(ctx);
+      return await super.find(ctx);
     }
   })
 );
