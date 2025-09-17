@@ -144,7 +144,7 @@ export default factories.createCoreController(
           projectId as any,
           {
             populate: normalizedQuery.populate ?? {
-              image: true,
+              coverImage: true,
               gallery: true,
               project_categories: true
             }
@@ -301,7 +301,7 @@ export default factories.createCoreController(
       // Default populate to include key relations/media unless caller specified populate
       if (!normalizedQuery.populate) {
         normalizedQuery.populate = {
-          image: true,
+          coverImage: true,
           gallery: true,
           project_categories: true
         } as any;
