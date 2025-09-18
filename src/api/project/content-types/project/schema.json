@@ -22,11 +22,11 @@
     },
     "longTitle": {
       "type": "text",
-      "required": true
+      "required": false
     },
     "subTitle": {
       "type": "text",
-      "required": true
+      "required": false
     },
     "description": {
       "type": "text",

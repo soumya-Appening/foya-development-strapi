@@ -829,7 +829,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     location: Schema.Attribute.String;
-    longTitle: Schema.Attribute.Text & Schema.Attribute.Required;
+    longTitle: Schema.Attribute.Text;
     project_categories: Schema.Attribute.Relation<
       'manyToMany',
       'api::project-category.project-category'
@@ -839,7 +839,7 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
     slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     sortOrder: Schema.Attribute.Integer;
     sqareFootage: Schema.Attribute.String;
-    subTitle: Schema.Attribute.Text & Schema.Attribute.Required;
+    subTitle: Schema.Attribute.Text;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     type: Schema.Attribute.Text;
     units: Schema.Attribute.String;
