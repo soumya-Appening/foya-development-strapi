@@ -19,6 +19,36 @@
     },
     "job_type": {
       "type": "string"
+    },
+    "description": {
+      "type": "blocks"
+    },
+    "responsibilities": {
+      "type": "blocks"
+    },
+    "qualification": {
+      "type": "blocks"
+    },
+    "job_benefits": {
+      "type": "blocks"
+    },
+    "contacts": {
+      "type": "blocks"
+    },
+    "job_location": {
+      "type": "string"
+    },
+    "working_hour": {
+      "type": "string"
+    },
+    "base_salary": {
+      "type": "string"
+    },
+    "date_posted": {
+      "type": "date"
+    },
+    "valid_through": {
+      "type": "date"
     }
   }
 }

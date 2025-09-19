@@ -623,9 +623,15 @@ export interface ApiJobOpeningJobOpening extends Struct.CollectionTypeSchema {
     draftAndPublish: true;
   };
   attributes: {
+    base_salary: Schema.Attribute.String;
+    contacts: Schema.Attribute.Blocks;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    date_posted: Schema.Attribute.Date;
+    description: Schema.Attribute.Blocks;
+    job_benefits: Schema.Attribute.Blocks;
+    job_location: Schema.Attribute.String;
     job_type: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -636,9 +642,13 @@ export interface ApiJobOpeningJobOpening extends Struct.CollectionTypeSchema {
     location: Schema.Attribute.String;
     position: Schema.Attribute.String;
     publishedAt: Schema.Attribute.DateTime;
+    qualification: Schema.Attribute.Blocks;
+    responsibilities: Schema.Attribute.Blocks;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    valid_through: Schema.Attribute.Date;
+    working_hour: Schema.Attribute.String;
   };
 }
 

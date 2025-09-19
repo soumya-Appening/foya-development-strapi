@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-09-18T12:52:53.813Z"
+    "x-generation-date": "2025-09-19T11:54:16.371Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -11970,6 +11970,28 @@
               "job_type": {
                 "type": "string"
               },
+              "description": {},
+              "responsibilities": {},
+              "qualification": {},
+              "job_benefits": {},
+              "contacts": {},
+              "job_location": {
+                "type": "string"
+              },
+              "working_hour": {
+                "type": "string"
+              },
+              "base_salary": {
+                "type": "string"
+              },
+              "date_posted": {
+                "type": "string",
+                "format": "date"
+              },
+              "valid_through": {
+                "type": "string",
+                "format": "date"
+              },
               "locale": {
                 "type": "string"
               },
@@ -12043,6 +12065,28 @@
           },
           "job_type": {
             "type": "string"
+          },
+          "description": {},
+          "responsibilities": {},
+          "qualification": {},
+          "job_benefits": {},
+          "contacts": {},
+          "job_location": {
+            "type": "string"
+          },
+          "working_hour": {
+            "type": "string"
+          },
+          "base_salary": {
+            "type": "string"
+          },
+          "date_posted": {
+            "type": "string",
+            "format": "date"
+          },
+          "valid_through": {
+            "type": "string",
+            "format": "date"
           },
           "createdAt": {
             "type": "string",
@@ -12352,6 +12396,28 @@
                 },
                 "job_type": {
                   "type": "string"
+                },
+                "description": {},
+                "responsibilities": {},
+                "qualification": {},
+                "job_benefits": {},
+                "contacts": {},
+                "job_location": {
+                  "type": "string"
+                },
+                "working_hour": {
+                  "type": "string"
+                },
+                "base_salary": {
+                  "type": "string"
+                },
+                "date_posted": {
+                  "type": "string",
+                  "format": "date"
+                },
+                "valid_through": {
+                  "type": "string",
+                  "format": "date"
                 },
                 "createdAt": {
                   "type": "string",
