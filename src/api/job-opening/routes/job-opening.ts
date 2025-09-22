@@ -1,7 +1,11 @@
 /**
  * job-opening router
  */
+import { factories } from "@strapi/strapi";
 
-import { factories } from '@strapi/strapi';
-
-export default factories.createCoreRouter('api::job-opening.job-opening');
+export default factories.createCoreRouter("api::job-opening.job-opening", {
+  config: {
+    find: { middlewares: [] },
+    findOne: { middlewares: [] }
+  }
+});
