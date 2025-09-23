@@ -13,6 +13,7 @@ export default factories.createCoreController(
       // Support custom `limit` param => maps to Strapi v4 pagination[pageSize]
       const {
         limit,
+        page,
         sort,
         isFeatured,
         // category filters
@@ -32,9 +33,15 @@ export default factories.createCoreController(
         ...restQuery
       } = query as Record<string, any>;
 
-      const pageSize = limit ? Number(limit) : undefined;
-      if (pageSize !== undefined && (Number.isNaN(pageSize) || pageSize <= 0)) {
+      // Default pagination: limit=10, page=1
+      const pageSize = limit ? Number(limit) : 10;
+      const currentPage = page ? Number(page) : 1;
+
+      if (Number.isNaN(pageSize) || pageSize <= 0) {
         ctx.throw(400, "Invalid limit parameter");
+      }
+      if (Number.isNaN(currentPage) || currentPage <= 0) {
+        ctx.throw(400, "Invalid page parameter");
       }
 
       // Build Strapi-compliant query
@@ -281,13 +288,13 @@ export default factories.createCoreController(
       if (Object.keys(mergedFilters).length > 0) {
         normalizedQuery.filters = mergedFilters;
       }
-      if (pageSize !== undefined) {
-        normalizedQuery.pagination = {
-          page: 1,
-          pageSize,
-          ...((restQuery as any).pagination || {})
-        };
-      }
+
+      // Set pagination with defaults
+      normalizedQuery.pagination = {
+        page: currentPage,
+        pageSize,
+        ...((restQuery as any).pagination || {})
+      };
 
       // Default sort: sortOrder ascending, allow sort=asc|desc to control
       const direction =
