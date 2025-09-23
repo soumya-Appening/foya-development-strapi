@@ -29,7 +29,7 @@
       "required": false
     },
     "description": {
-      "type": "text",
+      "type": "blocks",
       "required": true
     },
     "cardImage": {
