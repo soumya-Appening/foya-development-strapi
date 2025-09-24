@@ -29,8 +29,13 @@
       "required": false
     },
     "description": {
-      "type": "text",
-      "required": true
+      "type": "blocks"
+    },
+    "project_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::project-category.project-category",
+      "inversedBy": "projects"
     },
     "cardImage": {
       "type": "media",
@@ -69,12 +74,6 @@
     },
     "isFeatured": {
       "type": "boolean"
-    },
-    "project_categories": {
-      "type": "relation",
-      "relation": "manyToMany",
-      "target": "api::project-category.project-category",
-      "inversedBy": "projects"
     },
     "location": {
       "type": "string"
