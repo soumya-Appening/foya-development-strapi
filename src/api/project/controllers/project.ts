@@ -336,7 +336,7 @@ export default factories.createCoreController(
             gallery: true,
             carouselGallery: true,
             project_categories: true,
-            sections: { populate: "*" } // ✅ Added sections
+            sections: { populate: "*" }
           }
         }
       );

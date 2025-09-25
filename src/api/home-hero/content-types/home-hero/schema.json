@@ -11,18 +11,10 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
-      "type": "string"
-    },
-    "banners": {
-      "type": "media",
-      "multiple": true,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+    "heroBanners": {
+      "type": "component",
+      "component": "shared.hero-banners",
+      "repeatable": true
     }
   }
 }
