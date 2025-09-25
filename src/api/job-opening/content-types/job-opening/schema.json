@@ -12,16 +12,34 @@
   "pluginOptions": {},
   "attributes": {
     "position": {
-      "type": "string"
-    },
-    "location": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "job_type": {
-      "type": "string"
+      "type": "enumeration",
+      "required": true,
+      "default": "Full-time",
+      "enum": [
+        "Full-time",
+        "Part-time",
+        "Contractor",
+        "Temporary",
+        "Intern",
+        "Volunteer",
+        "Per diem",
+        "Other"
+      ]
     },
     "description": {
-      "type": "blocks"
+      "type": "blocks",
+      "required": true
+    },
+    "isRemote": {
+      "type": "boolean"
+    },
+    "location": {
+      "type": "string",
+      "required": true
     },
     "working_hour": {
       "type": "string"
@@ -31,6 +49,9 @@
     },
     "date_posted": {
       "type": "date"
+    },
+    "experience": {
+      "type": "string"
     },
     "valid_through": {
       "type": "date"

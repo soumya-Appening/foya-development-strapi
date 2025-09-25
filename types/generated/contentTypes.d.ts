@@ -624,17 +624,32 @@ export interface ApiJobOpeningJobOpening extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     date_posted: Schema.Attribute.Date;
-    description: Schema.Attribute.Blocks;
+    description: Schema.Attribute.Blocks & Schema.Attribute.Required;
     dynamic_details: Schema.Attribute.Component<'shared.dynamic-details', true>;
-    job_type: Schema.Attribute.String;
+    experience: Schema.Attribute.String;
+    isRemote: Schema.Attribute.Boolean;
+    job_type: Schema.Attribute.Enumeration<
+      [
+        'Full-time',
+        'Part-time',
+        'Contractor',
+        'Temporary',
+        'Intern',
+        'Volunteer',
+        'Per diem',
+        'Other',
+      ]
+    > &
+      Schema.Attribute.Required &
+      Schema.Attribute.DefaultTo<'Full-time'>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::job-opening.job-opening'
     > &
       Schema.Attribute.Private;
-    location: Schema.Attribute.String;
-    position: Schema.Attribute.String;
+    location: Schema.Attribute.String & Schema.Attribute.Required;
+    position: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &

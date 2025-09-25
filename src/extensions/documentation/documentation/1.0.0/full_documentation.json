@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-09-25T13:04:40.154Z"
+    "x-generation-date": "2025-09-25T13:22:20.336Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -11367,18 +11367,37 @@
         ],
         "properties": {
           "data": {
+            "required": [
+              "position",
+              "job_type",
+              "description",
+              "location"
+            ],
             "type": "object",
             "properties": {
               "position": {
                 "type": "string"
               },
+              "job_type": {
+                "type": "string",
+                "enum": [
+                  "Full-time",
+                  "Part-time",
+                  "Contractor",
+                  "Temporary",
+                  "Intern",
+                  "Volunteer",
+                  "Per diem",
+                  "Other"
+                ]
+              },
+              "description": {},
+              "isRemote": {
+                "type": "boolean"
+              },
               "location": {
                 "type": "string"
               },
-              "job_type": {
-                "type": "string"
-              },
-              "description": {},
               "working_hour": {
                 "type": "string"
               },
@@ -11388,6 +11407,9 @@
               "date_posted": {
                 "type": "string",
                 "format": "date"
+              },
+              "experience": {
+                "type": "string"
               },
               "valid_through": {
                 "type": "string",
@@ -11457,6 +11479,12 @@
       },
       "JobOpening": {
         "type": "object",
+        "required": [
+          "position",
+          "job_type",
+          "description",
+          "location"
+        ],
         "properties": {
           "id": {
             "type": "number"
@@ -11467,13 +11495,26 @@
           "position": {
             "type": "string"
           },
+          "job_type": {
+            "type": "string",
+            "enum": [
+              "Full-time",
+              "Part-time",
+              "Contractor",
+              "Temporary",
+              "Intern",
+              "Volunteer",
+              "Per diem",
+              "Other"
+            ]
+          },
+          "description": {},
+          "isRemote": {
+            "type": "boolean"
+          },
           "location": {
             "type": "string"
           },
-          "job_type": {
-            "type": "string"
-          },
-          "description": {},
           "working_hour": {
             "type": "string"
           },
@@ -11483,6 +11524,9 @@
           "date_posted": {
             "type": "string",
             "format": "date"
+          },
+          "experience": {
+            "type": "string"
           },
           "valid_through": {
             "type": "string",
@@ -11797,13 +11841,26 @@
                 "position": {
                   "type": "string"
                 },
+                "job_type": {
+                  "type": "string",
+                  "enum": [
+                    "Full-time",
+                    "Part-time",
+                    "Contractor",
+                    "Temporary",
+                    "Intern",
+                    "Volunteer",
+                    "Per diem",
+                    "Other"
+                  ]
+                },
+                "description": {},
+                "isRemote": {
+                  "type": "boolean"
+                },
                 "location": {
                   "type": "string"
                 },
-                "job_type": {
-                  "type": "string"
-                },
-                "description": {},
                 "working_hour": {
                   "type": "string"
                 },
@@ -11813,6 +11870,9 @@
                 "date_posted": {
                   "type": "string",
                   "format": "date"
+                },
+                "experience": {
+                  "type": "string"
                 },
                 "valid_through": {
                   "type": "string",
