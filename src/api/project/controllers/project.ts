@@ -319,6 +319,32 @@ export default factories.createCoreController(
         .find(normalizedQuery);
       return this.transformResponse(entity);
     },
+
+    async findOne(ctx) {
+      const { id } = ctx.params;
+      const { query } = ctx;
+
+      const normalizedQuery = { ...query };
+      const projectId = id;
+
+      const entity = await strapi.entityService.findOne(
+        "api::project.project",
+        projectId,
+        {
+          populate: normalizedQuery.populate ?? {
+            coverImage: true,
+            gallery: true,
+            carouselGallery: true,
+            project_categories: true,
+            sections: { populate: "*" } // ✅ Added sections
+          }
+        }
+      );
+
+      const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+      return this.transformResponse(sanitizedEntity);
+    },
+
     async create(ctx) {
       const body = ctx.request.body as any;
       const data = body?.data ?? body;
