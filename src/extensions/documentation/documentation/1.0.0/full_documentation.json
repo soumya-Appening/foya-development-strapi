@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-09-25T11:46:42.657Z"
+    "x-generation-date": "2025-09-25T12:19:25.216Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -11379,13 +11379,6 @@
                 "type": "string"
               },
               "description": {},
-              "responsibilities": {},
-              "qualification": {},
-              "job_benefits": {},
-              "contacts": {},
-              "job_location": {
-                "type": "string"
-              },
               "working_hour": {
                 "type": "string"
               },
@@ -11399,6 +11392,12 @@
               "valid_through": {
                 "type": "string",
                 "format": "date"
+              },
+              "dynamic_details": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/SharedDynamicDetailsComponent"
+                }
               },
               "locale": {
                 "type": "string"
@@ -11475,13 +11474,6 @@
             "type": "string"
           },
           "description": {},
-          "responsibilities": {},
-          "qualification": {},
-          "job_benefits": {},
-          "contacts": {},
-          "job_location": {
-            "type": "string"
-          },
           "working_hour": {
             "type": "string"
           },
@@ -11495,6 +11487,12 @@
           "valid_through": {
             "type": "string",
             "format": "date"
+          },
+          "dynamic_details": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SharedDynamicDetailsComponent"
+            }
           },
           "createdAt": {
             "type": "string",
@@ -11806,13 +11804,6 @@
                   "type": "string"
                 },
                 "description": {},
-                "responsibilities": {},
-                "qualification": {},
-                "job_benefits": {},
-                "contacts": {},
-                "job_location": {
-                  "type": "string"
-                },
                 "working_hour": {
                   "type": "string"
                 },
@@ -11826,6 +11817,12 @@
                 "valid_through": {
                   "type": "string",
                   "format": "date"
+                },
+                "dynamic_details": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SharedDynamicDetailsComponent"
+                  }
                 },
                 "createdAt": {
                   "type": "string",
@@ -11892,6 +11889,15 @@
           "meta": {
             "type": "object"
           }
+        }
+      },
+      "SharedDynamicDetailsComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "dynamicDetails": {}
         }
       },
       "PortfolioRequest": {

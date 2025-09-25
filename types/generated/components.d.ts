@@ -51,6 +51,16 @@ export interface SharedCta extends Struct.ComponentSchema {
   };
 }
 
+export interface SharedDynamicDetails extends Struct.ComponentSchema {
+  collectionName: 'components_shared_dynamic_details';
+  info: {
+    displayName: 'Dynamic Details';
+  };
+  attributes: {
+    dynamicDetails: Schema.Attribute.Blocks;
+  };
+}
+
 export interface SharedDynamicSection extends Struct.ComponentSchema {
   collectionName: 'components_shared_dynamic_sections';
   info: {
@@ -334,6 +344,7 @@ declare module '@strapi/strapi' {
       'shared.contact-detail': SharedContactDetail;
       'shared.contact-info': SharedContactInfo;
       'shared.cta': SharedCta;
+      'shared.dynamic-details': SharedDynamicDetails;
       'shared.dynamic-section': SharedDynamicSection;
       'shared.filters': SharedFilters;
       'shared.footer': SharedFooter;

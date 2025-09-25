@@ -1,0 +1,13 @@
+{
+  "collectionName": "components_shared_dynamic_details",
+  "info": {
+    "displayName": "Dynamic Details"
+  },
+  "options": {},
+  "attributes": {
+    "dynamicDetails": {
+      "type": "blocks"
+    }
+  },
+  "config": {}
+}

@@ -23,21 +23,6 @@
     "description": {
       "type": "blocks"
     },
-    "responsibilities": {
-      "type": "blocks"
-    },
-    "qualification": {
-      "type": "blocks"
-    },
-    "job_benefits": {
-      "type": "blocks"
-    },
-    "contacts": {
-      "type": "blocks"
-    },
-    "job_location": {
-      "type": "string"
-    },
     "working_hour": {
       "type": "string"
     },
@@ -49,6 +34,11 @@
     },
     "valid_through": {
       "type": "date"
+    },
+    "dynamic_details": {
+      "type": "component",
+      "component": "shared.dynamic-details",
+      "repeatable": true
     }
   }
 }
