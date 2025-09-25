@@ -5,7 +5,10 @@
   },
   "options": {},
   "attributes": {
-    "dynamicDetails": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
       "type": "blocks"
     }
   },

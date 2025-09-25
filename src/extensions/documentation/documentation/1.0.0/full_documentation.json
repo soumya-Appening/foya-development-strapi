@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-09-25T12:19:25.216Z"
+    "x-generation-date": "2025-09-25T13:04:40.154Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -11897,7 +11897,10 @@
           "id": {
             "type": "number"
           },
-          "dynamicDetails": {}
+          "title": {
+            "type": "string"
+          },
+          "description": {}
         }
       },
       "PortfolioRequest": {

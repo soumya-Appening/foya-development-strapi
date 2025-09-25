@@ -57,7 +57,8 @@ export interface SharedDynamicDetails extends Struct.ComponentSchema {
     displayName: 'Dynamic Details';
   };
   attributes: {
-    dynamicDetails: Schema.Attribute.Blocks;
+    description: Schema.Attribute.Blocks;
+    title: Schema.Attribute.String;
   };
 }
 
