@@ -10,7 +10,7 @@ const LISTING_FIELDS = [
   "position",
   "location",
   "job_type",
-  "job_location",
+  "isRemote",
   "working_hour",
   "base_salary",
   "date_posted",
@@ -23,21 +23,18 @@ const DETAILED_FIELDS = [
   "location",
   "job_type",
   "description",
-  "responsibilities",
-  "qualification",
-  "job_benefits",
-  "contacts",
-  "job_location",
+  "isRemote",
   "working_hour",
   "base_salary",
   "date_posted",
+  "experience",
   "valid_through"
 ] as any;
 
 export default factories.createCoreController(
   "api::job-opening.job-opening",
   ({ strapi }) => ({
-    // 📌 1. Job Listing with filters
+    // 1. Job Listing with filters
     async find(ctx: Context) {
       const query = ctx.query;
 
@@ -49,20 +46,22 @@ export default factories.createCoreController(
         "location",
         "job_type",
         "description",
-        "responsibilities",
-        "qualification",
-        "job_benefits",
-        "contacts",
-        "job_location",
+        "isRemote",
         "working_hour",
         "base_salary",
         "date_posted",
+        "experience",
         "valid_through"
       ];
 
       for (const field of filterableFields) {
         if (query[field]) {
-          filters[field] = { $containsi: query[field] }; // case-insensitive search
+          // Handle boolean field differently
+          if (field === "isRemote") {
+            filters[field] = query[field] === "true";
+          } else {
+            filters[field] = { $containsi: query[field] }; // case-insensitive search
+          }
         }
       }
 
@@ -105,7 +104,7 @@ export default factories.createCoreController(
       return { data, meta };
     },
 
-    // 📌 2. Job Details by ID
+    // 2. Job Details by ID
     async findOne(ctx: Context) {
       const { id } = ctx.params;
       if (!id) return ctx.badRequest("Job ID is required");
@@ -115,7 +114,9 @@ export default factories.createCoreController(
         id,
         {
           fields: DETAILED_FIELDS,
-          populate: "*",
+          populate: {
+            job_details: true
+          },
           publicationState: "live"
         }
       );
