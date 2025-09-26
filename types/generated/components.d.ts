@@ -54,7 +54,7 @@ export interface SharedCta extends Struct.ComponentSchema {
 export interface SharedDynamicDetails extends Struct.ComponentSchema {
   collectionName: 'components_shared_dynamic_details';
   info: {
-    displayName: 'Dynamic Details';
+    displayName: 'Job Details';
   };
   attributes: {
     description: Schema.Attribute.Blocks;

@@ -625,9 +625,9 @@ export interface ApiJobOpeningJobOpening extends Struct.CollectionTypeSchema {
       Schema.Attribute.Private;
     date_posted: Schema.Attribute.Date;
     description: Schema.Attribute.Blocks & Schema.Attribute.Required;
-    dynamic_details: Schema.Attribute.Component<'shared.dynamic-details', true>;
     experience: Schema.Attribute.String;
     isRemote: Schema.Attribute.Boolean;
+    job_details: Schema.Attribute.Component<'shared.dynamic-details', true>;
     job_type: Schema.Attribute.Enumeration<
       [
         'Full-time',
