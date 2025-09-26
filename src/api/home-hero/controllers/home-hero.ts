@@ -8,21 +8,21 @@ export default factories.createCoreController(
   "api::home-hero.home-hero",
   ({ strapi }) => ({
     async find(ctx) {
-      // Ensure banners are populated
+      // Ensure heroBanners are populated
       const incomingPopulate = (ctx.query as any)?.populate;
       let mergedPopulate: any;
       if (!incomingPopulate) {
-        mergedPopulate = { banners: true };
+        mergedPopulate = { heroBanners: true };
       } else if (Array.isArray(incomingPopulate)) {
         mergedPopulate = Array.from(
-          new Set([...(incomingPopulate as any[]), "banners"])
+          new Set([...(incomingPopulate as any[]), "heroBanners"])
         );
       } else if (typeof incomingPopulate === "string") {
-        mergedPopulate = [incomingPopulate, "banners"];
+        mergedPopulate = [incomingPopulate, "heroBanners"];
       } else if (typeof incomingPopulate === "object") {
-        mergedPopulate = { ...(incomingPopulate as any), banners: true };
+        mergedPopulate = { ...(incomingPopulate as any), heroBanners: true };
       } else {
-        mergedPopulate = { banners: true };
+        mergedPopulate = { heroBanners: true };
       }
 
       const params = { ...(ctx.query as any), populate: mergedPopulate } as any;
@@ -62,8 +62,8 @@ export default factories.createCoreController(
       const mapItem = (item: any) => {
         if (!item) return item;
         // Flat shape (as used elsewhere in this project)
-        if ("banners" in item) {
-          return { ...item, banners: absolutizeMedia(item.banners) };
+        if ("heroBanners" in item) {
+          return { ...item, heroBanners: absolutizeMedia(item.heroBanners) };
         }
         // Strapi default attributes shape fallback
         if (item.attributes) {
@@ -71,7 +71,7 @@ export default factories.createCoreController(
             ...item,
             attributes: {
               ...item.attributes,
-              banners: absolutizeMedia(item.attributes.banners)
+              heroBanners: absolutizeMedia(item.attributes.heroBanners)
             }
           };
         }
