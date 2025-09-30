@@ -5,6 +5,7 @@
 import { factories } from "@strapi/strapi";
 
 // Helper function to prepend base URL to image paths
+// Helper function to prepend base URL to image paths
 function prependBaseUrl(data: any, baseUrl: string): any {
   if (!data) return data;
 
@@ -37,6 +38,9 @@ function prependBaseUrl(data: any, baseUrl: string): any {
 
     if (processed.coverImage) {
       processed.coverImage = processImage(processed.coverImage);
+    }
+    if (processed.cardImage) {
+      processed.cardImage = processImage(processed.cardImage);
     }
     if (processed.gallery && Array.isArray(processed.gallery)) {
       processed.gallery = processed.gallery.map(processImage);
