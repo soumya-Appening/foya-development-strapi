@@ -87,16 +87,19 @@ export default factories.createCoreController(
         filters.valid_through = { $gte: new Date() };
       }
 
+      // Get limit from query or default to 10
+      const limit = query.limit ? parseInt(query.limit as string) : 10;
+      const page = query.page ? parseInt(query.page as string) : 1;
+
       const validQueryParams: any = {
-        ...query,
         filters,
         fields: LISTING_FIELDS,
-        publicationState: "live"
+        publicationState: "live",
+        pagination: {
+          page: page,
+          pageSize: limit
+        }
       };
-
-      // Pagination
-      if (query.start) validQueryParams.start = parseInt(query.start as string);
-      if (query.limit) validQueryParams.limit = parseInt(query.limit as string);
 
       ctx.query = validQueryParams;
 
