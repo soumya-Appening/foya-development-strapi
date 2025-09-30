@@ -8,11 +8,20 @@ export default factories.createCoreController(
   "api::home-hero.home-hero",
   ({ strapi }) => ({
     async find(ctx) {
-      // Ensure heroBanners are populated
+      const baseUrl = process.env.BASE_URL || "https://api-foya.appening.xyz";
+
+      // Ensure heroBanners and nested bannerImage are populated
       const incomingPopulate = (ctx.query as any)?.populate;
       let mergedPopulate: any;
+
       if (!incomingPopulate) {
-        mergedPopulate = { heroBanners: true };
+        mergedPopulate = {
+          heroBanners: {
+            populate: {
+              bannerImage: true
+            }
+          }
+        };
       } else if (Array.isArray(incomingPopulate)) {
         mergedPopulate = Array.from(
           new Set([...(incomingPopulate as any[]), "heroBanners"])
@@ -20,9 +29,22 @@ export default factories.createCoreController(
       } else if (typeof incomingPopulate === "string") {
         mergedPopulate = [incomingPopulate, "heroBanners"];
       } else if (typeof incomingPopulate === "object") {
-        mergedPopulate = { ...(incomingPopulate as any), heroBanners: true };
+        mergedPopulate = {
+          ...(incomingPopulate as any),
+          heroBanners: {
+            populate: {
+              bannerImage: true
+            }
+          }
+        };
       } else {
-        mergedPopulate = { heroBanners: true };
+        mergedPopulate = {
+          heroBanners: {
+            populate: {
+              bannerImage: true
+            }
+          }
+        };
       }
 
       const params = { ...(ctx.query as any), populate: mergedPopulate } as any;
@@ -30,10 +52,6 @@ export default factories.createCoreController(
         .service("api::home-hero.home-hero")
         .find(params);
       let response = (this as any).transformResponse(entity);
-
-      const baseUrl =
-        (strapi.config.get("server.url") as string | undefined) ||
-        `${ctx.request.protocol}://${ctx.request.host}`;
 
       const absolutizeUrl = (
         url?: string | null
@@ -61,9 +79,27 @@ export default factories.createCoreController(
 
       const mapItem = (item: any) => {
         if (!item) return item;
+
+        const processHeroBanners = (banners: any) => {
+          if (!banners) return banners;
+          if (!Array.isArray(banners)) return banners;
+          return banners.map((banner: any) => {
+            if (!banner) return banner;
+            return {
+              ...banner,
+              bannerImage: banner.bannerImage
+                ? absolutizeMedia(banner.bannerImage)
+                : banner.bannerImage
+            };
+          });
+        };
+
         // Flat shape (as used elsewhere in this project)
         if ("heroBanners" in item) {
-          return { ...item, heroBanners: absolutizeMedia(item.heroBanners) };
+          return {
+            ...item,
+            heroBanners: processHeroBanners(item.heroBanners)
+          };
         }
         // Strapi default attributes shape fallback
         if (item.attributes) {
@@ -71,17 +107,37 @@ export default factories.createCoreController(
             ...item,
             attributes: {
               ...item.attributes,
-              heroBanners: absolutizeMedia(item.attributes.heroBanners)
+              heroBanners: processHeroBanners(item.attributes.heroBanners)
             }
           };
         }
         return item;
       };
 
-      if (Array.isArray(response?.data)) {
-        response.data = response.data.map(mapItem);
-      } else if (response?.data) {
-        response.data = mapItem(response.data);
+      // Handle different response structures from transformResponse
+      if (response?.data) {
+        if (Array.isArray(response.data)) {
+          response = {
+            ...response,
+            data: response.data.map(mapItem)
+          };
+        } else if (
+          response.data.results &&
+          Array.isArray(response.data.results)
+        ) {
+          response = {
+            ...response,
+            data: {
+              ...response.data,
+              results: response.data.results.map(mapItem)
+            }
+          };
+        } else {
+          response = {
+            ...response,
+            data: mapItem(response.data)
+          };
+        }
       }
 
       return response;

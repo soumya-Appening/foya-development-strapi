@@ -4,11 +4,79 @@
 
 import { factories } from "@strapi/strapi";
 
+// Helper function to prepend base URL to image paths
+function prependBaseUrl(data: any, baseUrl: string): any {
+  if (!data) return data;
+
+  const processUrl = (url: string) => {
+    if (!url || url.startsWith("http")) return url;
+    return `${baseUrl}${url}`;
+  };
+
+  const processImage = (img: any) => {
+    if (!img) return img;
+    const processed = { ...img };
+    if (processed.url) {
+      processed.url = processUrl(processed.url);
+    }
+    if (processed.formats) {
+      processed.formats = { ...processed.formats };
+      Object.keys(processed.formats).forEach((key) => {
+        processed.formats[key] = { ...processed.formats[key] };
+        if (processed.formats[key].url) {
+          processed.formats[key].url = processUrl(processed.formats[key].url);
+        }
+      });
+    }
+    return processed;
+  };
+
+  const processItem = (item: any) => {
+    if (!item) return item;
+    const processed = { ...item };
+
+    if (processed.coverImage) {
+      processed.coverImage = processImage(processed.coverImage);
+    }
+    if (processed.gallery && Array.isArray(processed.gallery)) {
+      processed.gallery = processed.gallery.map(processImage);
+    }
+    if (processed.carouselGallery && Array.isArray(processed.carouselGallery)) {
+      processed.carouselGallery = processed.carouselGallery.map(processImage);
+    }
+    return processed;
+  };
+
+  // Handle different response structures
+  if (data.data) {
+    const result = { ...data };
+    if (Array.isArray(data.data)) {
+      result.data = data.data.map(processItem);
+    } else if (data.data.results && Array.isArray(data.data.results)) {
+      result.data = { ...data.data };
+      result.data.results = data.data.results.map(processItem);
+    } else {
+      result.data = processItem(data.data);
+    }
+    return result;
+  } else if (Array.isArray(data)) {
+    return data.map(processItem);
+  } else if (data.results && Array.isArray(data.results)) {
+    return {
+      ...data,
+      results: data.results.map(processItem)
+    };
+  } else {
+    return processItem(data);
+  }
+}
+
 export default factories.createCoreController(
   "api::project.project",
   ({ strapi }) => ({
     async find(ctx) {
       const { query } = ctx;
+      const baseUrl = process.env.BASE_URL || "https://api-foya.appening.xyz";
 
       // Support custom `limit` param => maps to Strapi v4 pagination[pageSize]
       const {
@@ -157,7 +225,8 @@ export default factories.createCoreController(
             }
           }
         );
-        return this.transformResponse(entity);
+        const transformed = this.transformResponse(entity);
+        return prependBaseUrl(transformed, baseUrl);
       }
 
       // Related projects: same category as a given project id, excluding it
@@ -317,12 +386,14 @@ export default factories.createCoreController(
       const entity = await strapi
         .service("api::project.project")
         .find(normalizedQuery);
-      return this.transformResponse(entity);
+      const transformed = this.transformResponse(entity);
+      return prependBaseUrl(transformed, baseUrl);
     },
 
     async findOne(ctx) {
       const { id } = ctx.params;
       const { query } = ctx;
+      const baseUrl = process.env.BASE_URL || "https://api-foya.appening.xyz";
 
       const normalizedQuery = { ...query };
       const projectId = id;
@@ -342,7 +413,8 @@ export default factories.createCoreController(
       );
 
       const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
-      return this.transformResponse(sanitizedEntity);
+      const transformed = this.transformResponse(sanitizedEntity);
+      return prependBaseUrl(transformed, baseUrl);
     },
 
     async create(ctx) {

@@ -8,6 +8,8 @@ export default factories.createCoreController(
   "api::team-member.team-member",
   ({ strapi }) => ({
     async find(ctx) {
+      const baseUrl = process.env.BASE_URL || "https://api-foya.appening.xyz";
+
       // Ensure photo is populated
       const incomingPopulate = (ctx.query as any)?.populate;
       let mergedPopulate: any;
@@ -38,10 +40,6 @@ export default factories.createCoreController(
         .service("api::team-member.team-member")
         .find(params);
       let response = (this as any).transformResponse(entity);
-
-      const baseUrl =
-        (strapi.config.get("server.url") as string | undefined) ||
-        `${ctx.request.protocol}://${ctx.request.host}`;
 
       const absolutizeUrl = (
         url?: string | null
@@ -86,10 +84,30 @@ export default factories.createCoreController(
         return item;
       };
 
-      if (Array.isArray(response?.data)) {
-        response.data = response.data.map(mapItem);
-      } else if (response?.data) {
-        response.data = mapItem(response.data);
+      // Handle different response structures
+      if (response?.data) {
+        if (Array.isArray(response.data)) {
+          response = {
+            ...response,
+            data: response.data.map(mapItem)
+          };
+        } else if (
+          response.data.results &&
+          Array.isArray(response.data.results)
+        ) {
+          response = {
+            ...response,
+            data: {
+              ...response.data,
+              results: response.data.results.map(mapItem)
+            }
+          };
+        } else {
+          response = {
+            ...response,
+            data: mapItem(response.data)
+          };
+        }
       }
 
       return response;
