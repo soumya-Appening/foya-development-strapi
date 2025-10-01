@@ -88,6 +88,9 @@ export default factories.createCoreController(
         page,
         sort,
         isFeatured,
+        isProjectDesign,
+        isProjectManagement,
+        isPropertyAssetManagement,
         // category filters
         category,
         categoryId,
@@ -154,6 +157,15 @@ export default factories.createCoreController(
       // Explicit isFeatured flag support
       if (isFeatured !== undefined && toBooleanTrue(isFeatured)) {
         mergedFilters.isFeatured = { $eq: true };
+      }
+      if (isProjectDesign !== undefined && toBooleanTrue(isProjectDesign)) {
+        mergedFilters.isProjectDesign = { $eq: true };
+      }
+      if (isProjectManagement !== undefined && toBooleanTrue(isProjectManagement)) {
+        mergedFilters.isProjectManagement = { $eq: true };
+      }
+      if (isPropertyAssetManagement !== undefined && toBooleanTrue(isPropertyAssetManagement)) {
+        mergedFilters.isPropertyAssetManagement = { $eq: true };
       }
 
       // Category/status boolean flags mapped to known slug/name aliases
