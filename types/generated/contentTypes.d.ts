@@ -410,6 +410,50 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiAvailabilityAvailability
+  extends Struct.CollectionTypeSchema {
+  collectionName: 'availabilities';
+  info: {
+    displayName: 'Availability';
+    pluralName: 'availabilities';
+    singularName: 'availability';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    application: Schema.Attribute.String;
+    contact: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.Blocks;
+    floorPlan: Schema.Attribute.String;
+    image: Schema.Attribute.Media<'images' | 'files' | 'videos' | 'audios'>;
+    isDivisible: Schema.Attribute.Boolean;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::availability.availability'
+    > &
+      Schema.Attribute.Private;
+    location: Schema.Attribute.String & Schema.Attribute.Required;
+    publishedAt: Schema.Attribute.DateTime;
+    size: Schema.Attribute.String;
+    squareFeetMax: Schema.Attribute.Integer;
+    squareFeetMin: Schema.Attribute.Integer;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
+    type: Schema.Attribute.Enumeration<
+      ['Affordable Housing', 'Market Rate Housing', 'Commercial Availabilities']
+    > &
+      Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    website: Schema.Attribute.String;
+  };
+}
+
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
@@ -949,6 +993,9 @@ export interface ApiProjectProject extends Struct.CollectionTypeSchema {
       true
     >;
     isFeatured: Schema.Attribute.Boolean;
+    isProjectDesign: Schema.Attribute.Boolean;
+    isProjectManagement: Schema.Attribute.Boolean;
+    isPropertyAssetManagement: Schema.Attribute.Boolean;
     link: Schema.Attribute.String;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -1520,6 +1567,7 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::availability.availability': ApiAvailabilityAvailability;
       'api::category.category': ApiCategoryCategory;
       'api::company.company': ApiCompanyCompany;
       'api::contact-detail.contact-detail': ApiContactDetailContactDetail;

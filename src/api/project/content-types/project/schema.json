@@ -105,6 +105,15 @@
       "components": [
         "shared.project-details-sections"
       ]
+    },
+    "isProjectDesign": {
+      "type": "boolean"
+    },
+    "isProjectManagement": {
+      "type": "boolean"
+    },
+    "isPropertyAssetManagement": {
+      "type": "boolean"
     }
   }
 }
