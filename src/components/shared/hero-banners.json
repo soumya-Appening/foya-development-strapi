@@ -24,6 +24,11 @@
         "videos",
         "audios"
       ]
+    },
+    "project": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::project.project"
     }
   },
   "config": {}

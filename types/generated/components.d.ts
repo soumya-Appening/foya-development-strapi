@@ -166,6 +166,7 @@ export interface SharedHeroBanners extends Struct.ComponentSchema {
       'images' | 'files' | 'videos' | 'audios'
     >;
     link: Schema.Attribute.String;
+    project: Schema.Attribute.Relation<'oneToOne', 'api::project.project'>;
     subTitle: Schema.Attribute.Text;
     title: Schema.Attribute.String;
   };

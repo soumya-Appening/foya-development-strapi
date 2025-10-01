@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "2025-10-01T06:16:48.065Z"
+    "x-generation-date": "2025-10-01T08:40:09.969Z"
   },
   "x-strapi-config": {
     "plugins": [
@@ -12494,7 +12494,36 @@
                 }
               }
             }
+          },
+          "project": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "number"
+              },
+              "documentId": {
+                "type": "string"
+              }
+            }
           }
+        }
+      },
+      "SharedProjectDetailsSectionsComponent": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "__component": {
+            "type": "string",
+            "enum": [
+              "shared.project-details-sections"
+            ]
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {}
         }
       },
       "HomepageRequest": {
@@ -18669,24 +18698,6 @@
           "meta": {
             "type": "object"
           }
-        }
-      },
-      "SharedProjectDetailsSectionsComponent": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "number"
-          },
-          "__component": {
-            "type": "string",
-            "enum": [
-              "shared.project-details-sections"
-            ]
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {}
         }
       },
       "ProjectCategoryRequest": {
