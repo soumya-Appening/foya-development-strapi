@@ -12,7 +12,7 @@ export default factories.createCoreController(
       const incomingPopulate = (ctx.query as any)?.populate;
       let mergedPopulate: any;
       const nestedPopulate = {
-        heroBanners: { populate: { bannerImage: true } }
+        heroBanners: { populate: { bannerImage: true, project: true } }
       } as any;
       if (!incomingPopulate) {
         mergedPopulate = nestedPopulate;
