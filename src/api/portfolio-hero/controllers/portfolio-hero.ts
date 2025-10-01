@@ -34,9 +34,7 @@ export default factories.createCoreController(
         .find(params);
       let response = (this as any).transformResponse(entity);
 
-      const baseUrl =
-        (strapi.config.get("server.url") as string | undefined) ||
-        `${ctx.request.protocol}://${ctx.request.host}`;
+      const baseUrl = process.env.BASE_URL;
 
       const absolutizeUrl = (
         url?: string | null
@@ -72,7 +70,16 @@ export default factories.createCoreController(
 
       const mapItem = (item: any) => {
         if (!item) return item;
-        // Flat shape
+
+        // Handle paginated shape with results
+        if ("results" in item && Array.isArray(item.results)) {
+          return {
+            ...item,
+            results: item.results.map((res: any) => mapItem(res))
+          };
+        }
+
+        // Flat shape with heroBanners
         if ("heroBanners" in item) {
           return { ...item, heroBanners: mapHeroBanners(item.heroBanners) };
         }
@@ -90,9 +97,9 @@ export default factories.createCoreController(
       };
 
       if (Array.isArray(response?.data)) {
-        response.data = response.data.map(mapItem);
+        response.data = response?.data?.map(mapItem);
       } else if (response?.data) {
-        response.data = mapItem(response.data);
+        response.data = mapItem(response?.data);
       }
 
       return response;
