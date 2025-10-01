@@ -263,7 +263,7 @@ export default factories.createCoreController(
         typeConstraint?: "category" | "status"
       ): Promise<string | number | undefined> => {
         const filters: Record<string, any> = {
-          $or: [{ slug: { $eqi: value } }, { name: { $eqi: value } }]
+          $or: [{ slug: { $in: value } }, { name: { $in: value } }]
         };
         if (typeConstraint) filters.type = { $eq: typeConstraint };
         const found = await strapi.entityService.findMany(
