@@ -440,8 +440,6 @@ export interface ApiAvailabilityAvailability
     location: Schema.Attribute.String & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     size: Schema.Attribute.String;
-    squareFeetMax: Schema.Attribute.Integer;
-    squareFeetMin: Schema.Attribute.Integer;
     title: Schema.Attribute.String & Schema.Attribute.Required;
     type: Schema.Attribute.Enumeration<
       ['Affordable Housing', 'Market Rate Housing', 'Commercial Availabilities']

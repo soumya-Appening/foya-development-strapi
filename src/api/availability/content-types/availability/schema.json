@@ -40,12 +40,6 @@
     "size": {
       "type": "string"
     },
-    "squareFeetMin": {
-      "type": "integer"
-    },
-    "squareFeetMax": {
-      "type": "integer"
-    },
     "isDivisible": {
       "type": "boolean"
     },
