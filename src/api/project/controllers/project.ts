@@ -161,10 +161,16 @@ export default factories.createCoreController(
       if (isProjectDesign !== undefined && toBooleanTrue(isProjectDesign)) {
         mergedFilters.isProjectDesign = { $eq: true };
       }
-      if (isProjectManagement !== undefined && toBooleanTrue(isProjectManagement)) {
+      if (
+        isProjectManagement !== undefined &&
+        toBooleanTrue(isProjectManagement)
+      ) {
         mergedFilters.isProjectManagement = { $eq: true };
       }
-      if (isPropertyAssetManagement !== undefined && toBooleanTrue(isPropertyAssetManagement)) {
+      if (
+        isPropertyAssetManagement !== undefined &&
+        toBooleanTrue(isPropertyAssetManagement)
+      ) {
         mergedFilters.isPropertyAssetManagement = { $eq: true };
       }
 
@@ -210,16 +216,39 @@ export default factories.createCoreController(
           names: ["Current Project", "Current Projects"]
         }
       };
-      for (const [flag, aliases] of Object.entries(flagToAliases)) {
-        if (flag in restQuery && toBooleanTrue((restQuery as any)[flag])) {
-          const orConditions = [
-            ...aliases.slugs.map((s) => ({
-              project_categories: { slug: { $eqi: s } }
-            })),
-            ...aliases.names.map((n) => ({
-              project_categories: { name: { $eqi: n } }
-            }))
-          ];
+
+      // Collect all requested slugs/names from boolean flags and apply a single relation filter
+      {
+        const requestedSlugs: string[] = [];
+        const requestedNames: string[] = [];
+
+        for (const [flag, aliases] of Object.entries(flagToAliases)) {
+          if (flag in restQuery && toBooleanTrue((restQuery as any)[flag])) {
+            requestedSlugs.push(...aliases.slugs);
+            requestedNames.push(...aliases.names);
+          }
+        }
+
+        if (requestedSlugs.length || requestedNames.length) {
+          // Prefer slug-based $in as it's usually faster; also allow matching by name
+          const orConditions: any[] = [];
+          if (requestedSlugs.length) {
+            orConditions.push({
+              project_categories: {
+                slug: { $in: requestedSlugs }
+              }
+            });
+          }
+          if (requestedNames.length) {
+            orConditions.push({
+              project_categories: {
+                name: { $in: requestedNames }
+              }
+            });
+          }
+
+
+          // merge as a single $and clause entry to avoid many repeated OR/ANDs
           mergedFilters.$and = [
             ...(mergedFilters.$and || []),
             { $or: orConditions }
@@ -274,8 +303,13 @@ export default factories.createCoreController(
         value: string,
         typeConstraint?: "category" | "status"
       ): Promise<string | number | undefined> => {
+        // ensure we pass arrays into $in
+        const candidateValues = Array.isArray(value) ? value : [value];
         const filters: Record<string, any> = {
-          $or: [{ slug: { $in: value } }, { name: { $in: value } }]
+          $or: [
+            { slug: { $in: candidateValues } },
+            { name: { $in: candidateValues } }
+          ]
         };
         if (typeConstraint) filters.type = { $eq: typeConstraint };
         const found = await strapi.entityService.findMany(
@@ -289,6 +323,7 @@ export default factories.createCoreController(
         if (found?.length) return found[0].id as any;
         return undefined;
       };
+
 
       // Category filters: by id, slug, or name. Accept multiple values.
       const collectIdsFromParam = async (
