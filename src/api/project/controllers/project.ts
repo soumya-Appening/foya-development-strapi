@@ -247,7 +247,6 @@ export default factories.createCoreController(
             });
           }
 
-
           // merge as a single $and clause entry to avoid many repeated OR/ANDs
           mergedFilters.$and = [
             ...(mergedFilters.$and || []),
@@ -323,7 +322,6 @@ export default factories.createCoreController(
         if (found?.length) return found[0].id as any;
         return undefined;
       };
-
 
       // Category filters: by id, slug, or name. Accept multiple values.
       const collectIdsFromParam = async (
@@ -447,25 +445,53 @@ export default factories.createCoreController(
       const baseUrl = process.env.BASE_URL || "https://api-foya.appening.xyz";
 
       const normalizedQuery = { ...query };
-      const projectId = id;
 
-      const entity = await strapi.entityService.findOne(
-        "api::project.project",
-        projectId,
-        {
-          populate: normalizedQuery.populate ?? {
-            coverImage: true,
-            gallery: true,
-            carouselGallery: true,
-            project_categories: true,
-            sections: { populate: "*" }
-          }
+      // Determine if the parameter is a numeric ID or a slug
+      const isNumericId = !isNaN(Number(id)) && /^\d+$/.test(id);
+
+      let entity;
+
+      const populateConfig = normalizedQuery.populate ?? {
+        coverImage: true,
+        gallery: true,
+        carouselGallery: true,
+        project_categories: true,
+        sections: { populate: "*" }
+      };
+
+      try {
+        if (isNumericId) {
+          // Find by numeric ID
+          entity = await strapi.entityService.findOne(
+            "api::project.project",
+            id,
+            { populate: populateConfig }
+          );
+        } else {
+          // Find by slug
+          const results = await strapi.entityService.findMany(
+            "api::project.project",
+            {
+              filters: { slug: id },
+              populate: populateConfig,
+              limit: 1
+            }
+          );
+
+          entity = results?.[0] || null;
         }
-      );
 
-      const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
-      const transformed = this.transformResponse(sanitizedEntity);
-      return prependBaseUrl(transformed, baseUrl);
+        // Handle not found
+        if (!entity) {
+          return ctx.notFound("Project not found");
+        }
+
+        const sanitizedEntity = await this.sanitizeOutput(entity, ctx);
+        const transformed = this.transformResponse(sanitizedEntity);
+        return prependBaseUrl(transformed, baseUrl);
+      } catch (error) {
+        ctx.throw(500, error);
+      }
     },
 
     async create(ctx) {
